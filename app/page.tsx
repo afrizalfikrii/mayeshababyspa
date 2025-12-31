@@ -153,7 +153,7 @@ export default function App() {
              {[
                { val: "500+", lab: "Happy Baby" },
                { val: "100%", lab: "Certified Bidan" },
-               { val: "4.9", lab: "Rating Google" }
+               { val: "5.0", lab: "Rating Google" }
              ].map((stat, i) => (
                <div key={i} className="flex flex-col items-center">
                  <span className="text-2xl md:text-3xl font-extrabold text-slate-900">{stat.val}</span>
