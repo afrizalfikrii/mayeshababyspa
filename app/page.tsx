@@ -52,7 +52,7 @@ const faqs = [
 export default function App() {
   const [activeTab, setActiveTab] = useState('All');
   const [scrolled, setScrolled] = useState(false);
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Scroll Listener for Navbar Effect
   useEffect(() => {
