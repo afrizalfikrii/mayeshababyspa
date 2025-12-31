@@ -4,41 +4,43 @@ import { Baby, Heart, Phone, MapPin, Star, CheckCircle, ArrowRight, Instagram, M
 
 // --- DATA ---
 const services = [
-  // Baby & Kids Treatment
-  { name: "Baby 0-1b / HR", age: "0-1 Bulan", price: "30K - 35K", category: "Baby", desc: "Pijat lembut untuk bayi baru lahir.", icon: Baby },
-  { name: "Baby 1-3b / HR", age: "1-3 Bulan", price: "35K - 40K", category: "Baby", desc: "Pijat relaksasi bayi usia 1-3 bulan.", icon: Baby },
-  { name: "Baby 3-6b / HR", age: "3-6 Bulan", price: "40K - 45K", category: "Baby", desc: "Pijat tumbuh kembang bayi 3-6 bulan.", icon: Baby },
-  { name: "Baby 6-12b / HR", age: "6-12 Bulan", price: "45K - 50K", category: "Baby", desc: "Pijat bayi usia 6-12 bulan.", icon: Baby },
+  // Baby and Kids
+  { name: "Baby 0-1 th / +IR", age: "0-1 Tahun", price: "30K - 35K", category: "Baby", desc: "Pijat lembut untuk bayi 0-1 tahun dengan Infra Red.", icon: Baby },
+  { name: "Baby 1-3 th / +IR", age: "1-3 Tahun", price: "35K - 40K", category: "Baby", desc: "Pijat relaksasi bayi 1-3 tahun dengan Infra Red.", icon: Baby },
+  { name: "Baby 3-4 th / +IR", age: "3-4 Tahun", price: "40K - 45K", category: "Baby", desc: "Pijat tumbuh kembang anak 3-4 tahun dengan Infra Red.", icon: Baby },
+  { name: "Anak >5 th / +IR", age: ">5 Tahun", price: "45K - 50K", category: "Kids", desc: "Pijat untuk anak di atas 5 tahun dengan Infra Red.", icon: Smile },
   { name: "Baby Spa (Massage, Gym, Swim)", age: "All Ages", price: "80K", category: "Package", desc: "Paket lengkap: Massage + Baby Gym + Renang.", icon: Star, highlight: true },
-  { name: "Baby Swim (Renang)", age: "Baby", price: "55K", category: "Baby", desc: "Renang bayi dengan kolam air hangat.", icon: Baby },
-  { name: "Kids Spa (Massage, Mandi Busa/Bola)", age: "Kids", price: "50K", category: "Kids", desc: "Spa anak dengan massage dan mandi busa.", icon: Smile },
-  { name: "Bubble Bath (Mandi Busa/Bola)", age: "Kids", price: "55K", category: "Kids", desc: "Sensasi mandi busa ceria dengan mainan bola.", icon: Baby },
-  { name: "Memandikan Bayi (Baru Lahir Home Care)", age: "Newborn", price: "45K", category: "Baby", desc: "Layanan memandikan bayi baru lahir di rumah.", icon: Baby },
-  { name: "Perawatan Tali Pusar & Keadaan Bayi", age: "Newborn", price: "45K", category: "Baby", desc: "Perawatan tali pusar dan kondisi bayi baru lahir.", icon: ShieldCheck },
-  { name: "Mandi Bayi", age: "Baby", price: "12K", category: "Baby", desc: "Layanan mandi bayi profesional.", icon: Baby },
-  { name: "Potong Kuku", age: "All Ages", price: "10K", category: "Baby", desc: "Potong kuku bayi dan anak dengan aman.", icon: CheckCircle },
-  { name: "Memberikan Sisi Karung", age: "Baby", price: "15K", category: "Baby", desc: "Perawatan tradisional untuk bayi.", icon: Baby },
+  { name: "Baby Swim", age: "Baby", price: "50K", category: "Baby", desc: "Renang bayi dengan kolam air hangat.", icon: Baby },
+  { name: "Kids Spa (Massage, Mandi busa + bola)", age: "Kids", price: "90K", category: "Kids", desc: "Spa anak lengkap dengan massage dan mandi busa.", icon: Smile },
+  { name: "Bubble Bath (Mandi busa + bola)", age: "Kids", price: "55K", category: "Kids", desc: "Sensasi mandi busa ceria dengan mainan bola.", icon: Baby },
+  { name: "Cukur Gundul", age: "Baby", price: "30K", category: "Care", desc: "Cukur rambut bayi hingga bersih dan rapi.", icon: CheckCircle },
+  { name: "Memandikan Bayi Baru Lahir Home Care", age: "Newborn", price: "45K", category: "Baby", desc: "Mandi, perawatan tali pusar, pemantauan ikterik di rumah.", icon: Baby },
+  { name: "Mandi Bayi", age: "Baby", price: "15K", category: "Baby", desc: "Layanan mandi bayi profesional.", icon: Baby },
+  { name: "Masker Anak", age: "Kids", price: "10K", category: "Care", desc: "Masker perawatan wajah untuk anak.", icon: Smile },
+  { name: "Membersihkan Sela Korang", age: "Baby", price: "15K", category: "Care", desc: "Membersihkan sela-sela kulit bayi.", icon: CheckCircle },
   
-  // Baby & Kids Treatment - Terapi
+  // Baby & Kids Treatment
   { name: "Pijat Batuk Pilek", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat khusus meredakan batuk pilek anak.", icon: ShieldCheck },
-  { name: "Pijat Demam", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat untuk menurunkan demam anak.", icon: ShieldCheck },
+  { name: "Pijat Sembelit", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat untuk mengatasi sembelit pada anak.", icon: ShieldCheck },
   { name: "Pijat Nafsu Makan", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat meningkatkan nafsu makan anak.", icon: Heart },
   { name: "Pijat Susah Tidur", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat relaksasi agar anak tidur nyenyak.", icon: Heart },
-  { name: "Pijat Kolik", age: "Baby", price: "40K - 60K", category: "Health", desc: "Pijat khusus meredakan kolik pada bayi.", icon: ShieldCheck },
-  { name: "Pijat Bayi Prematur", age: "Prematur", price: "30K", category: "Health", desc: "Pijat lembut untuk bayi prematur.", icon: Heart },
-  { name: "Lulur / Nebulizer", age: "Kids", price: "45K", category: "Health", desc: "Lulur atau terapi nebulizer untuk anak.", icon: ShieldCheck },
+  { name: "Pijat Perut Kembung", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat untuk meredakan perut kembung.", icon: ShieldCheck },
+  { name: "Pijat Bayi Prematur", age: "Prematur", price: "30K", category: "Health", desc: "Pijat lembut khusus untuk bayi prematur.", icon: Heart },
+  { name: "Uap / Nebulizer", age: "Kids", price: "30K", category: "Health", desc: "Terapi uap nebulizer untuk anak.", icon: ShieldCheck },
   { name: "Sinar / Infrared", age: "Baby", price: "20K", category: "Health", desc: "Terapi sinar infrared untuk bayi.", icon: Star },
   { name: "Nebulizer + Infrared", age: "Baby", price: "45K", category: "Health", desc: "Kombinasi nebulizer dan infrared.", icon: ShieldCheck },
+  { name: "Tindik", age: "Baby", price: "45K", category: "Care", desc: "Tindik telinga bayi yang aman.", icon: CheckCircle },
   { name: "Tapping", age: "Kids", price: "25K", category: "Health", desc: "Terapi tapping untuk anak.", icon: CheckCircle },
-  { name: "Cukur Gundul", age: "Baby", price: "30K", category: "Care", desc: "Cukur rambut bayi hingga bersih dan rapi.", icon: CheckCircle },
+  { name: "Potong Kuku", age: "All Ages", price: "25K", category: "Care", desc: "Potong kuku bayi dan anak dengan aman.", icon: CheckCircle },
   
   // Mom Treatment
   { name: "Pijat Laktasi", age: "Mom", price: "75K", category: "Mom", desc: "Treatment melancarkan ASI untuk ibu menyusui.", icon: Heart },
   { name: "Pijat Hamil", age: "Mom", price: "120K", category: "Mom", desc: "Pijat khusus untuk ibu hamil.", icon: Heart },
   { name: "Pijat Nifas", age: "Mom", price: "120K", category: "Mom", desc: "Pijat pemulihan pasca melahirkan.", icon: Heart },
-  { name: "Tolak Angin", age: "Mom", price: "25K", category: "Mom", desc: "Terapi tolak angin tradisional.", icon: Heart },
-  { name: "Breast Care (Perawatan Payudara)", age: "Mom", price: "75K", category: "Mom", desc: "Perawatan payudara untuk remaja dan ibu.", icon: Heart },
-  { name: "Mom Spa (Massage + Berendam Rempah)", age: "Mom", price: "175K", category: "Mom", desc: "Me time: Full body massage + Lulur + Berendam.", icon: Heart, highlight: true },
+  { name: "Totok Wajah", age: "Mom", price: "25K", category: "Mom", desc: "Totok wajah untuk perawatan kulit ibu.", icon: Heart },
+  { name: "Hidroterapi (Berendam Rempah)", age: "Mom", price: "75K", category: "Mom", desc: "Berendam dengan rempah-rempah tradisional.", icon: Heart },
+  { name: "Mom Spa (Massage + Berendam Rempah)", age: "Mom", price: "175K", category: "Mom", desc: "Me time: Full body massage + Berendam rempah.", icon: Heart, highlight: true },
+  { name: "Bekam", age: "Mom", price: "75K", category: "Mom", desc: "Terapi bekam untuk ibu.", icon: Heart },
 ];
 
 const faqs = [
