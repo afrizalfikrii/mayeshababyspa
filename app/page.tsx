@@ -170,13 +170,13 @@ export default function App() {
       <section id="pricelist" className="py-24 px-6 relative rounded-t-[3rem] -mt-12 z-20 bg-white shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
+            <div className="text-center md:text-left w-full md:w-auto">
               <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Daftar Menu & Harga</span>
               <h2 className="text-4xl font-extrabold">Pilihan Perawatan</h2>
             </div>
             
             {/* Custom Tab Switcher */}
-            <div className="p-1.5 rounded-full flex bg-slate-100">
+            <div className="p-1.5 rounded-full flex bg-slate-100 mx-auto md:mx-0 w-fit">
               {['All', 'Baby', 'Mom'].map((tab) => (
                 <button
                   key={tab}
@@ -241,6 +241,99 @@ export default function App() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- TESTIMONIALS SECTION --- */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Testimoni Customer</span>
+            <h2 className="text-4xl font-extrabold mb-4">Apa Kata Mereka?</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Kepuasan customer adalah prioritas kami. Berikut testimoni dari para Bunda yang sudah merasakan layanan Mayesha Baby Spa.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Ibu Siti Nurhaliza",
+                service: "Baby Spa Complete",
+                rating: 5,
+                text: "Alhamdulillah baby saya jadi lebih aktif dan tidurnya nyenyak setelah rutin baby spa di Mayesha. Terapis nya ramah dan profesional banget!",
+                initial: "S"
+              },
+              {
+                name: "Ibu Dewi Lestari",
+                service: "Pijat Laktasi",
+                rating: 5,
+                text: "Pijat laktasi di sini sangat membantu melancarkan ASI saya. Sekarang baby kenyang terus dan saya lebih tenang. Recommended!",
+                initial: "D"
+              },
+              {
+                name: "Ibu Rina Wijaya",
+                service: "Kids Spa",
+                rating: 5,
+                text: "Anak saya suka banget mandi busa di Mayesha! Tempatnya bersih, air hangatnya pas, dan terapis sabar banget sama anak-anak. Top!",
+                initial: "R"
+              },
+              {
+                name: "Ibu Fitri Handayani",
+                service: "Pijat Batuk Pilek",
+                rating: 5,
+                text: "Baby saya batuk pilek langsung membaik setelah dipijat di Mayesha. Terapis nya bidan bersertifikat jadi saya percaya banget!",
+                initial: "F"
+              },
+              {
+                name: "Ibu Maya Kusuma",
+                service: "Mom Spa",
+                rating: 5,
+                text: "Me time terbaik! Mom spa nya bikin badan fresh lagi setelah cape ngurus baby. Massage nya enak banget dan berendam rempahnya relaxing!",
+                initial: "M"
+              },
+              {
+                name: "Ibu Ayu Pramesti",
+                service: "Baby Swim",
+                rating: 5,
+                text: "Baby saya umur 4 bulan sudah berani renang di Mayesha. Kolamnya bersih, air hangat, dan baby jadi lebih ceria. Terima kasih Mayesha!",
+                initial: "A"
+              }
+            ].map((testimonial, idx) => (
+              <div 
+                key={idx}
+                className="p-6 rounded-2xl border border-slate-100 hover:border-pink-200 hover:shadow-lg transition-all duration-300 bg-slate-50"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+                    {testimonial.initial}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
+                    <p className="text-xs text-slate-500">{testimonial.service}</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-1 mb-3">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                
+                <p className="text-sm text-slate-600 leading-relaxed italic">"{testimonial.text}"</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <a 
+              href="https://www.google.com/search?q=mayesha+baby+spa" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-pink-500 transition-all"
+            >
+              <Star size={20} className="fill-yellow-400 text-yellow-400" />
+              Lihat Semua Review di Google
+            </a>
           </div>
         </div>
       </section>
