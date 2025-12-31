@@ -84,7 +84,7 @@ export default function App() {
           <div className="flex items-center gap-2 group cursor-pointer">
             <img src="/logo.png" alt="Mayesha Spa Logo" className="w-12 h-12 rounded-full object-cover" />
             <span className="text-2xl font-bold tracking-tight transition-colors text-slate-900">
-              Mayesha<span className="text-pink-500">Spa</span>
+              Mayesha <span className="text-pink-500">Baby Spa</span>
             </span>
           </div>
           
@@ -285,7 +285,7 @@ export default function App() {
             <div className="lg:col-span-2">
                <div className="flex items-center gap-2 mb-6">
                   <img src="/logo.png" alt="Mayesha Spa Logo" className="w-12 h-12 rounded-full object-cover" />
-                  <span className="text-2xl font-bold">Mayesha<span className="text-pink-500">Spa</span></span>
+                  <span className="text-2xl font-bold">Mayesha <span className="text-pink-500">Baby Spa</span></span>
                </div>
                <p className="text-lg max-w-md mb-8 text-slate-600">
                  Solusi kesehatan dan relaksasi keluarga. Kami menggabungkan perawatan modern dengan sentuhan kasih sayang.
