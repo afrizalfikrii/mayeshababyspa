@@ -1,65 +1,407 @@
-import Image from "next/image";
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Baby, Heart, Phone, MapPin, Star, CheckCircle, ArrowRight, Instagram, MessageCircle, ChevronDown, ChevronUp, ShieldCheck, Smile, Home } from 'lucide-react';
 
-export default function Home() {
+// --- DATA ---
+const services = [
+  // Baby & Kids Treatment
+  { name: "Baby 0-1b / HR", age: "0-1 Bulan", price: "30K - 35K", category: "Baby", desc: "Pijat lembut untuk bayi baru lahir.", icon: Baby },
+  { name: "Baby 1-3b / HR", age: "1-3 Bulan", price: "35K - 40K", category: "Baby", desc: "Pijat relaksasi bayi usia 1-3 bulan.", icon: Baby },
+  { name: "Baby 3-6b / HR", age: "3-6 Bulan", price: "40K - 45K", category: "Baby", desc: "Pijat tumbuh kembang bayi 3-6 bulan.", icon: Baby },
+  { name: "Baby 6-12b / HR", age: "6-12 Bulan", price: "45K - 50K", category: "Baby", desc: "Pijat bayi usia 6-12 bulan.", icon: Baby },
+  { name: "Baby Spa (Massage, Gym, Swim)", age: "All Ages", price: "80K", category: "Package", desc: "Paket lengkap: Massage + Baby Gym + Renang.", icon: Star, highlight: true },
+  { name: "Baby Swim (Renang)", age: "Baby", price: "55K", category: "Baby", desc: "Renang bayi dengan kolam air hangat.", icon: Baby },
+  { name: "Kids Spa (Massage, Mandi Busa/Bola)", age: "Kids", price: "50K", category: "Kids", desc: "Spa anak dengan massage dan mandi busa.", icon: Smile },
+  { name: "Bubble Bath (Mandi Busa/Bola)", age: "Kids", price: "55K", category: "Kids", desc: "Sensasi mandi busa ceria dengan mainan bola.", icon: Baby },
+  { name: "Memandikan Bayi (Baru Lahir Home Care)", age: "Newborn", price: "45K", category: "Baby", desc: "Layanan memandikan bayi baru lahir di rumah.", icon: Baby },
+  { name: "Perawatan Tali Pusar & Keadaan Bayi", age: "Newborn", price: "45K", category: "Baby", desc: "Perawatan tali pusar dan kondisi bayi baru lahir.", icon: ShieldCheck },
+  { name: "Mandi Bayi", age: "Baby", price: "12K", category: "Baby", desc: "Layanan mandi bayi profesional.", icon: Baby },
+  { name: "Potong Kuku", age: "All Ages", price: "10K", category: "Baby", desc: "Potong kuku bayi dan anak dengan aman.", icon: CheckCircle },
+  { name: "Memberikan Sisi Karung", age: "Baby", price: "15K", category: "Baby", desc: "Perawatan tradisional untuk bayi.", icon: Baby },
+  
+  // Baby & Kids Treatment - Terapi
+  { name: "Pijat Batuk Pilek", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat khusus meredakan batuk pilek anak.", icon: ShieldCheck },
+  { name: "Pijat Demam", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat untuk menurunkan demam anak.", icon: ShieldCheck },
+  { name: "Pijat Nafsu Makan", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat meningkatkan nafsu makan anak.", icon: Heart },
+  { name: "Pijat Susah Tidur", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat relaksasi agar anak tidur nyenyak.", icon: Heart },
+  { name: "Pijat Kolik", age: "Baby", price: "40K - 60K", category: "Health", desc: "Pijat khusus meredakan kolik pada bayi.", icon: ShieldCheck },
+  { name: "Pijat Bayi Prematur", age: "Prematur", price: "30K", category: "Health", desc: "Pijat lembut untuk bayi prematur.", icon: Heart },
+  { name: "Lulur / Nebulizer", age: "Kids", price: "45K", category: "Health", desc: "Lulur atau terapi nebulizer untuk anak.", icon: ShieldCheck },
+  { name: "Sinar / Infrared", age: "Baby", price: "20K", category: "Health", desc: "Terapi sinar infrared untuk bayi.", icon: Star },
+  { name: "Nebulizer + Infrared", age: "Baby", price: "45K", category: "Health", desc: "Kombinasi nebulizer dan infrared.", icon: ShieldCheck },
+  { name: "Tapping", age: "Kids", price: "25K", category: "Health", desc: "Terapi tapping untuk anak.", icon: CheckCircle },
+  { name: "Cukur Gundul", age: "Baby", price: "30K", category: "Care", desc: "Cukur rambut bayi hingga bersih dan rapi.", icon: CheckCircle },
+  
+  // Mom Treatment
+  { name: "Pijat Laktasi", age: "Mom", price: "75K", category: "Mom", desc: "Treatment melancarkan ASI untuk ibu menyusui.", icon: Heart },
+  { name: "Pijat Hamil", age: "Mom", price: "120K", category: "Mom", desc: "Pijat khusus untuk ibu hamil.", icon: Heart },
+  { name: "Pijat Nifas", age: "Mom", price: "120K", category: "Mom", desc: "Pijat pemulihan pasca melahirkan.", icon: Heart },
+  { name: "Tolak Angin", age: "Mom", price: "25K", category: "Mom", desc: "Terapi tolak angin tradisional.", icon: Heart },
+  { name: "Breast Care (Perawatan Payudara)", age: "Mom", price: "75K", category: "Mom", desc: "Perawatan payudara untuk remaja dan ibu.", icon: Heart },
+  { name: "Mom Spa (Massage + Berendam Rempah)", age: "Mom", price: "175K", category: "Mom", desc: "Me time: Full body massage + Lulur + Berendam.", icon: Heart, highlight: true },
+];
+
+const faqs = [
+  { q: "Apakah bisa dipanggil ke rumah (Home Care)?", a: "Tentu! Kami menyediakan layanan Home Care agar Bunda dan si Kecil tetap nyaman di rumah. Hubungi admin untuk jadwal & transport." },
+  { q: "Umur berapa bayi boleh mulai di-spa?", a: "Baby Spa (pijat & renang) disarankan mulai usia 3 bulan atau saat leher bayi sudah tegak/kuat. Untuk pijat saja bisa sejak newborn." },
+  { q: "Apakah air kolamnya hangat?", a: "Ya, kami selalu menggunakan air hangat yang suhunya disesuaikan dengan kenyamanan bayi agar tidak kedinginan." },
+];
+
+// --- COMPONENTS ---
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('All');
+  const [scrolled, setScrolled] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  // Scroll Listener for Navbar Effect
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Filter Logic
+  const filteredServices = activeTab === 'All' 
+    ? services 
+    : activeTab === 'Baby'
+    ? services.filter(s => ['Baby', 'Kids', 'Health', 'Package', 'Care'].includes(s.category))
+    : services.filter(s => s.category === 'Mom');
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen transition-colors duration-500 font-sans selection:bg-pink-500 selection:text-white bg-slate-50 text-slate-900">
+      
+      {/* --- ANIMATED BACKGROUND BLOBS --- */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full mix-blend-multiply filter blur-[120px] opacity-40 animate-blob bg-pink-300"></div>
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full mix-blend-multiply filter blur-[120px] opacity-40 animate-blob animation-delay-2000 bg-purple-300"></div>
+        <div className="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] rounded-full mix-blend-multiply filter blur-[120px] opacity-40 animate-blob animation-delay-4000 bg-rose-300"></div>
+      </div>
+
+      {/* --- NAVBAR (Desktop Only) --- */}
+      <nav className={`hidden md:block fixed w-full z-50 transition-all duration-300 px-6 py-4 ${scrolled ? 'bg-white/80 border-b border-slate-200' : 'bg-transparent'} backdrop-blur-lg`}>
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-2 group cursor-pointer">
+            <img src="/logo.png" alt="Mayesha Spa Logo" className="w-12 h-12 rounded-full object-cover" />
+            <span className="text-2xl font-bold tracking-tight transition-colors text-slate-900">
+              Mayesha<span className="text-pink-500">Spa</span>
+            </span>
+          </div>
+          
+          <div className="flex items-center gap-3 md:gap-6">
+            <div className="hidden md:flex gap-6 text-sm font-medium">
+              <a href="#home" className="hover:text-pink-500 transition-colors">Home</a>
+              <a href="#pricelist" className="hover:text-pink-500 transition-colors">Layanan</a>
+              <a href="#faq" className="hover:text-pink-500 transition-colors">FAQ</a>
+              <a href="#location" className="hover:text-pink-500 transition-colors">Lokasi</a>
+            </div>
+            
+            <a href="#booking" className="px-6 py-2.5 text-sm font-bold text-white bg-pink-500 hover:bg-pink-600 rounded-full transition-all shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 hover:-translate-y-0.5">
+              Reservasi
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* --- HERO SECTION --- */}
+      <header id="home" className="relative pt-40 pb-20 px-6 min-h-[90vh] flex flex-col justify-center items-center text-center">
+        <div className="max-w-5xl mx-auto z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-pink-200 backdrop-blur-md mb-8 animate-fade-in-up shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span className="text-xs font-bold tracking-wider uppercase text-pink-600">
+              Buka Setiap Hari 08.30 - 16.30 WIB
+            </span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tight">
+            Perawatan Terbaik untuk <br/>
+            <span className="relative inline-block mt-2">
+              <span className="relative z-10 text-pink-500">
+                Buah Hati & Bunda
+              </span>
+              <svg className="absolute w-full h-3 -bottom-1 left-0 text-pink-300 opacity-60 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                 <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
+              </svg>
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed text-slate-700">
+            Nikmati layanan <b>Baby Spa</b>, <b>Kids Massage</b>, dan <b>Mom Treatment</b> dengan terapis bidan profesional. Bisa Home Care langsung ke rumah Anda!
           </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a 
+              href="https://wa.me/6281325641896" 
+              target="_blank" 
+              className="group relative px-8 py-4 bg-slate-900 text-white rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 shadow-2xl hover:shadow-purple-500/20"
+            >
+              <div className="absolute inset-0 w-full h-full bg-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative flex items-center gap-2 group-hover:text-white">
+                <Phone size={20} /> Booking Sekarang
+              </span>
+            </a>
+            <a 
+              href="#pricelist"
+              className="px-8 py-4 rounded-full border-2 border-slate-200 font-bold text-lg transition-all flex items-center gap-2 hover:gap-4 hover:bg-white hover:shadow-lg"
+            >
+              Lihat Menu <ArrowRight size={18} />
+            </a>
+          </div>
+
+          {/* Stats / Trust Badges */}
+          <div className="mt-16 pt-8 border-t border-slate-200/50 grid grid-cols-3 gap-4 md:gap-12">
+             {[
+               { val: "500+", lab: "Happy Baby" },
+               { val: "100%", lab: "Certified Bidan" },
+               { val: "4.9", lab: "Rating Google" }
+             ].map((stat, i) => (
+               <div key={i} className="flex flex-col items-center">
+                 <span className="text-2xl md:text-3xl font-extrabold text-slate-900">{stat.val}</span>
+                 <span className="text-xs md:text-sm text-slate-600 uppercase tracking-wider font-semibold">{stat.lab}</span>
+               </div>
+             ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+      </header>
+
+      {/* --- SERVICES SECTION --- */}
+      <section id="pricelist" className="py-24 px-6 relative rounded-t-[3rem] -mt-12 z-20 bg-white shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+              <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Daftar Menu & Harga</span>
+              <h2 className="text-4xl font-extrabold">Pilihan Perawatan</h2>
+            </div>
+            
+            {/* Custom Tab Switcher */}
+            <div className="p-1.5 rounded-full flex bg-slate-100">
+              {['All', 'Baby', 'Mom'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                    activeTab === tab 
+                    ? 'bg-white text-slate-900 shadow-md' 
+                    : 'text-slate-500 hover:text-slate-700'
+                  }`}
+                >
+                  {tab === 'All' ? 'Semua' : tab === 'Baby' ? 'Kids & Baby' : 'Mom Care'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Grid Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredServices.map((service, idx) => (
+              <div 
+                key={idx}
+                className="group relative p-8 rounded-3xl transition-all duration-500 hover:-translate-y-2 border bg-slate-50 border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-pink-100/50 hover:border-pink-200"
+              >
+                {service.highlight && (
+                  <div className="absolute top-0 right-0 overflow-hidden rounded-tr-3xl rounded-bl-3xl">
+                     <div className="bg-pink-500 text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest shadow-lg">
+                       Best Seller
+                     </div>
+                  </div>
+                )}
+                
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 bg-white text-pink-500 shadow-lg shadow-pink-100">
+                  <service.icon size={28} strokeWidth={1.5} />
+                </div>
+
+                <div className="mb-4">
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-slate-200 text-slate-600">{service.age}</span>
+                  </div>
+                  <h3 className="text-lg font-bold leading-tight group-hover:text-pink-500 transition-colors">
+                    {service.name}
+                  </h3>
+                </div>
+                
+                <p className="text-sm mb-6 line-clamp-2 h-10 text-slate-600">
+                  {service.desc}
+                </p>
+
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+                   <div className="flex flex-col">
+                     <span className="text-[10px] uppercase text-slate-400 font-bold">Mulai dari</span>
+                     <span className="text-xl font-extrabold text-pink-500">{service.price}</span>
+                   </div>
+                   <a 
+                     href={`https://wa.me/6281325641896?text=Halo, saya mau booking *${service.name}* (${service.price}). Mohon info lebih lanjut.`}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 hover:bg-pink-500 hover:text-white transition-all"
+                   >
+                     <ArrowRight size={18} />
+                   </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section id="faq" className="py-20 px-6 bg-slate-50">
+         <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+               <h2 className="text-3xl font-bold mb-4">Sering Ditanyakan (FAQ)</h2>
+               <p className="text-slate-600">Informasi seputar layanan Mayesha Baby Spa</p>
+            </div>
+            
+            <div className="space-y-4">
+               {faqs.map((faq, i) => (
+                 <div 
+                    key={i} 
+                    className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                       openFaq === i 
+                       ? 'bg-white border-pink-200 shadow-lg shadow-pink-100' 
+                       : 'bg-white border-slate-200 hover:border-pink-200'
+                    }`}
+                 >
+                    <button 
+                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                       className="w-full flex items-center justify-between p-6 text-left font-bold focus:outline-none"
+                    >
+                       <span>{faq.q}</span>
+                       {openFaq === i ? <ChevronUp className="text-pink-500" /> : <ChevronDown className="text-slate-400" />}
+                    </button>
+                    <div className={`px-6 text-slate-600 leading-relaxed transition-all duration-300 ease-in-out ${openFaq === i ? 'max-h-40 pb-6 opacity-100' : 'max-h-0 opacity-0'}`}>
+                       {faq.a}
+                    </div>
+                 </div>
+               ))}
+            </div>
+         </div>
+      </section>
+
+      {/* --- LOCATION / FOOTER --- */}
+      <footer id="location" className="pt-20 pb-10 px-6 border-t bg-white border-slate-200">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-16">
+            
+            <div className="lg:col-span-2">
+               <div className="flex items-center gap-2 mb-6">
+                  <img src="/logo.png" alt="Mayesha Spa Logo" className="w-12 h-12 rounded-full object-cover" />
+                  <span className="text-2xl font-bold">Mayesha<span className="text-pink-500">Spa</span></span>
+               </div>
+               <p className="text-lg max-w-md mb-8 text-slate-600">
+                 Solusi kesehatan dan relaksasi keluarga. Kami menggabungkan perawatan modern dengan sentuhan kasih sayang.
+               </p>
+               <div className="flex gap-4">
+                  <a href="https://www.instagram.com/mayeshababyspa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-pink-100 text-pink-500 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-all"><Instagram size={20}/></a>
+                  <a href="https://m.me/mayesha.babyspa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all"><MessageCircle size={20}/></a>
+               </div>
+            </div>
+
+            <div>
+               <h4 className="font-bold text-lg mb-6">Kontak & Lokasi</h4>
+               <ul className="space-y-4 text-sm text-slate-600">
+                  <li className="flex flex-col gap-2">
+                     <div className="flex items-start gap-3">
+                       <MapPin className="text-pink-500 shrink-0 mt-0.5" size={18} />
+                       <span>Jl. Musi Tegalwinangun Rt 02 Rw 13 Tegalgede, Kec. Karanganyar, Kab. Karanganyar (Barat Pasar Bejen)</span>
+                     </div>
+                     <a 
+                       href="https://maps.app.goo.gl/wFPszoLPwrqvPav46" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="ml-6 inline-flex items-center gap-2 px-4 py-2 bg-pink-500 text-white text-xs font-bold rounded-full hover:bg-pink-600 transition-all w-fit"
+                     >
+                       <MapPin size={14} /> Buka di Maps
+                     </a>
+                  </li>
+                  <li className="flex items-center gap-3">
+                     <Phone className="text-pink-500 shrink-0" size={18} />
+                     <a href="https://wa.me/6281325641896" className="hover:text-pink-500 transition-colors">+62 813-2564-1896</a>
+                  </li>
+               </ul>
+            </div>
+
+            <div>
+               <h4 className="font-bold text-lg mb-6">Jam Operasional</h4>
+               <div className="p-4 rounded-xl border bg-slate-50 border-slate-100">
+                  <div className="flex justify-between items-center mb-2">
+                     <span className="text-sm font-medium">Senin - Minggu</span>
+                     <span className="text-xs font-bold px-2 py-1 rounded bg-green-100 text-green-700">BUKA</span>
+                  </div>
+                  <div className="text-2xl font-bold text-slate-900">08.30 - 16.30</div>
+               </div>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+             <p>&copy; 2025 Mayesha Baby Spa. All rights reserved.</p>
+             <div className="flex gap-6">
+                <a href="#" className="hover:text-pink-500">Privacy Policy</a>
+                <a href="#" className="hover:text-pink-500">Terms of Service</a>
+             </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* --- MOBILE BOTTOM NAVIGATION --- */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-lg">
+        <div className="flex justify-around items-center py-3 px-2">
+          <a href="#home" className="flex flex-col items-center gap-1 text-slate-600 hover:text-pink-500 transition-colors">
+            <Home size={22} />
+            <span className="text-[10px] font-medium">Home</span>
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          <a href="#pricelist" className="flex flex-col items-center gap-1 text-slate-600 hover:text-pink-500 transition-colors">
+            <Star size={22} />
+            <span className="text-[10px] font-medium">Layanan</span>
+          </a>
+          <a 
+            href="https://wa.me/6281325641896" 
             target="_blank"
-            rel="noopener noreferrer"
+            className="flex flex-col items-center gap-1 -mt-6 bg-pink-500 text-white p-4 rounded-full shadow-xl hover:bg-pink-600 transition-all"
           >
-            Documentation
+            <MessageCircle size={24} fill="white" />
+          </a>
+          <a href="#faq" className="flex flex-col items-center gap-1 text-slate-600 hover:text-pink-500 transition-colors">
+            <ChevronDown size={22} />
+            <span className="text-[10px] font-medium">FAQ</span>
+          </a>
+          <a href="#location" className="flex flex-col items-center gap-1 text-slate-600 hover:text-pink-500 transition-colors">
+            <MapPin size={22} />
+            <span className="text-[10px] font-medium">Lokasi</span>
           </a>
         </div>
-      </main>
+      </nav>
+
+      {/* --- FLOATING WHATSAPP BUTTON (Desktop Only) --- */}
+      <a 
+        href="https://wa.me/6281325641896" 
+        target="_blank"
+        className="hidden md:flex fixed bottom-6 right-6 z-50 items-center gap-2 px-4 py-3 bg-[#25D366] text-white rounded-full font-bold shadow-2xl hover:bg-[#20bd5a] hover:scale-105 transition-all animate-bounce-slow"
+      >
+         <MessageCircle size={24} fill="white" className="text-white" />
+         <span>Chat Admin</span>
+      </a>
+
+      {/* --- GLOBAL STYLES FOR ANIMATION --- */}
+      <style>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+        .animate-bounce-slow {
+           animation: bounce 3s infinite;
+        }
+      `}</style>
     </div>
   );
 }
