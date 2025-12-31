@@ -166,6 +166,62 @@ export default function App() {
         </div>
       </header>
 
+      {/* --- GALLERY SECTION --- */}
+      <section className="py-16 px-6 bg-slate-50 -mt-20 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Fasilitas Kami</span>
+            <h2 className="text-4xl font-extrabold mb-4">Lihat Fasilitas Mayesha Baby Spa</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Fasilitas modern, bersih, dan nyaman untuk kenyamanan buah hati dan Bunda.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              {
+                src: "/images/facility-pool.png",
+                alt: "Kolam Renang Bayi",
+                title: "Kolam Renang Bayi",
+                desc: "Kolam air hangat dengan wallpaper ceria"
+              },
+              {
+                src: "/images/facility-gym.jpg",
+                alt: "Ruang Baby Gym",
+                title: "Ruang Baby Gym",
+                desc: "Perosotan & mainan edukatif untuk si kecil"
+              },
+              {
+                src: "/images/facility-treatment.png",
+                alt: "Ruang Treatment",
+                title: "Ruang Treatment",
+                desc: "Ruang pijat yang bersih dan nyaman"
+              },
+              {
+                src: "/images/facility-massage.png",
+                alt: "Ruang Massage",
+                title: "Ruang Massage",
+                desc: "Matras empuk untuk kenyamanan bayi"
+              }
+            ].map((facility, idx) => (
+              <div 
+                key={idx}
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              >
+                <img 
+                  src={facility.src} 
+                  alt={facility.alt}
+                  className="w-full h-64 md:h-80 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="text-xl font-bold mb-1">{facility.title}</h3>
+                  <p className="text-sm text-slate-200">{facility.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* --- SERVICES SECTION --- */}
       <section id="pricelist" className="py-24 px-6 relative rounded-t-[3rem] -mt-12 z-20 bg-white shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
         <div className="max-w-7xl mx-auto">
