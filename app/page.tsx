@@ -102,26 +102,29 @@ export default function App() {
         <div className="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] rounded-full mix-blend-multiply filter blur-[120px] opacity-40 animate-blob animation-delay-4000 bg-rose-300"></div>
       </div>
 
-      {/* --- NAVBAR (Desktop Only) --- */}
-      <nav className={`hidden md:block fixed w-full z-50 transition-all duration-300 px-6 py-4 ${scrolled ? 'bg-white/80 border-b border-slate-200' : 'bg-transparent'} backdrop-blur-lg`}>
+      {/* --- NAVBAR --- */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 px-6 py-4 ${scrolled ? 'bg-white/80 border-b border-slate-200' : 'bg-transparent'} backdrop-blur-lg`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <img src="/logo.png" alt="Mayesha Spa Logo" className="w-12 h-12 rounded-full object-cover" />
-            <span className="text-2xl font-bold tracking-tight transition-colors text-slate-900">
+          {/* Logo + Brand (Always visible) */}
+          <a href="#home" className="flex items-center gap-2 group cursor-pointer">
+            <img src="/logo.png" alt="Mayesha Spa Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover" />
+            <span className="text-xl md:text-2xl font-bold tracking-tight transition-colors text-slate-900">
               Mayesha <span className="text-pink-500">Baby Spa</span>
             </span>
-          </div>
-          
-          <div className="flex items-center gap-3 md:gap-6">
-            <div className="hidden md:flex gap-6 text-sm font-medium">
-              <a href="#home" className="hover:text-pink-500 transition-colors">Home</a>
-              <a href="#pricelist" className="hover:text-pink-500 transition-colors">Layanan</a>
-              <a href="#faq" className="hover:text-pink-500 transition-colors">FAQ</a>
-              <a href="#location" className="hover:text-pink-500 transition-colors">Lokasi</a>
-            </div>
-            
-            <a href="#booking" className="px-6 py-2.5 text-sm font-bold text-white bg-pink-500 hover:bg-pink-600 rounded-full transition-all shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 hover:-translate-y-0.5">
-              Reservasi
+          </a>
+
+          {/* Menu Links (Desktop Only) */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#pricelist" className="font-medium hover:text-pink-500 transition-colors">Layanan</a>
+            <a href="#faq" className="font-medium hover:text-pink-500 transition-colors">FAQ</a>
+            <a href="#location" className="font-medium hover:text-pink-500 transition-colors">Lokasi</a>
+            <a 
+              href="https://wa.me/6281325641896" 
+              target="_blank"
+              className="px-6 py-2.5 bg-pink-500 text-white rounded-full font-bold hover:bg-pink-600 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
+            >
+              <MessageCircle size={18} />
+              Chat Sekarang
             </a>
           </div>
         </div>
