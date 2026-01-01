@@ -63,6 +63,28 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '-50px'
+      }
+    );
+
+    const elements = document.querySelectorAll('.animate-on-scroll, .animate-on-scroll-fast');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   // Filter Logic
   const filteredServices = activeTab === 'All' 
     ? services 
@@ -169,10 +191,10 @@ export default function App() {
       {/* --- GALLERY SECTION --- */}
       <section className="py-16 px-6 bg-slate-50 -mt-20 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Fasilitas Kami</span>
-            <h2 className="text-4xl font-extrabold mb-4">Lihat Fasilitas Mayesha Baby Spa</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Fasilitas modern, bersih, dan nyaman untuk kenyamanan buah hati dan Bunda.</p>
+          <div className="text-center mb-12 animate-on-scroll">
+            <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Galeri Kami</span>
+            <h2 className="text-4xl font-extrabold mb-4">Galeri Mayesha Baby Spa</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Lihat aktivitas layanan dan fasilitas lengkap kami.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
