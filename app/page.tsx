@@ -197,49 +197,100 @@ export default function App() {
             <p className="text-slate-600 max-w-2xl mx-auto">Lihat aktivitas layanan dan fasilitas lengkap kami.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              {
-                src: "/images/facility-pool.png",
-                alt: "Kolam Renang Bayi",
-                title: "Kolam Renang Bayi",
-                desc: "Kolam air hangat dengan wallpaper ceria"
-              },
-              {
-                src: "/images/facility-gym.jpg",
-                alt: "Ruang Baby Gym",
-                title: "Ruang Baby Gym",
-                desc: "Perosotan & mainan edukatif untuk si kecil"
-              },
-              {
-                src: "/images/facility-treatment.png",
-                alt: "Ruang Treatment",
-                title: "Ruang Treatment",
-                desc: "Ruang pijat yang bersih dan nyaman"
-              },
-              {
-                src: "/images/facility-massage.png",
-                alt: "Ruang Massage",
-                title: "Ruang Massage",
-                desc: "Matras empuk untuk kenyamanan bayi"
-              }
-            ].map((facility, idx) => (
-              <div 
-                key={idx}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
-              >
-                <img 
-                  src={facility.src} 
-                  alt={facility.alt}
-                  className="w-full h-64 md:h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-xl font-bold mb-1">{facility.title}</h3>
-                  <p className="text-sm text-slate-200">{facility.desc}</p>
+          {/* Activity Gallery */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold mb-6 text-slate-800 flex items-center gap-2 animate-on-scroll">
+              <Star className="text-pink-500 fill-pink-500" size={24} />
+              Aktivitas Kami
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  src: "/images/activity-swim-purple.png",
+                  alt: "Baby Spa & Swim",
+                  title: "Fun Baby Swim",
+                  desc: "Pengalaman renang seru"
+                },
+                {
+                  src: "/images/activity-team.jpg",
+                  alt: "Tim Profesional",
+                  title: "Bidan Profesional",
+                  desc: "Ditangani tenaga ahli"
+                },
+                {
+                  src: "/images/activity-massage.jpg",
+                  alt: "Pijat Bayi",
+                  title: "Baby Massage",
+                  desc: "Relaksasi untuk si kecil"
+                },
+                {
+                  src: "/images/activity-therapy.png",
+                  alt: "Terapi Sinar",
+                  title: "Layanan Kesehatan",
+                  desc: "Terapi infrared & uap"
+                }
+              ].map((item, idx) => (
+                <div 
+                  key={idx} 
+                  className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 animate-on-scroll"
+                >
+                  <img src={item.src} alt={item.alt} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h4 className="font-bold text-lg">{item.title}</h4>
+                    <p className="text-xs text-slate-200">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Facility Gallery */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6 text-slate-800 flex items-center gap-2 animate-on-scroll">
+              <Home className="text-pink-500" size={24} />
+              Fasilitas Kami
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  src: "/images/facility-pool.png",
+                  alt: "Kolam Renang Bayi",
+                  title: "Kolam Renang",
+                  desc: "Air hangat & nyaman"
+                },
+                {
+                  src: "/images/facility-gym.jpg",
+                  alt: "Ruang Baby Gym",
+                  title: "Baby Gym",
+                  desc: "Area bermain edukatif"
+                },
+                {
+                  src: "/images/facility-treatment.png",
+                  alt: "Ruang Treatment",
+                  title: "Ruang Private",
+                  desc: "Bersih & higienis"
+                },
+                {
+                  src: "/images/facility-massage.png",
+                  alt: "Ruang Massage",
+                  title: "Matras Empuk",
+                  desc: "Nyaman untuk bayi"
+                }
+              ].map((item, idx) => (
+                <div 
+                  key={idx} 
+                  className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 animate-on-scroll"
+                >
+                  <img src={item.src} alt={item.alt} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h4 className="font-bold text-lg">{item.title}</h4>
+                    <p className="text-xs text-slate-200">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
