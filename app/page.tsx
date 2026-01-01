@@ -583,16 +583,14 @@ export default function App() {
 
       {/* --- MOBILE BOTTOM NAVIGATION --- */}
       <nav 
-        className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-slate-200 shadow-lg" 
+        className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-lg block lg:hidden" 
         style={{ 
           position: 'fixed',
           bottom: 0,
           left: 0,
           right: 0,
-          display: 'flex',
-          visibility: 'visible',
-          opacity: 1,
-          zIndex: 9999
+          zIndex: 9999,
+          display: 'block'
         }}
       >
         <div className="flex justify-around items-center py-3 px-2">
