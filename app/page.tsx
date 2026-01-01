@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Baby, Heart, Phone, MapPin, Star, CheckCircle, ArrowRight, Instagram, MessageCircle, ChevronDown, ChevronUp, ShieldCheck, Smile, Home } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // --- DATA ---
 const services = [
@@ -169,55 +170,120 @@ export default function App() {
       {/* --- GALLERY SECTION --- */}
       <section className="py-16 px-6 bg-slate-50 -mt-20 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Fasilitas Kami</span>
-            <h2 className="text-4xl font-extrabold mb-4">Lihat Fasilitas Mayesha Baby Spa</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Fasilitas modern, bersih, dan nyaman untuk kenyamanan buah hati dan Bunda.</p>
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Galeri Kami</span>
+            <h2 className="text-4xl font-extrabold mb-4">Galeri Mayesha Baby Spa</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Lihat aktivitas layanan dan fasilitas lengkap kami.</p>
+          </motion.div>
+
+          {/* Activity Gallery */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold mb-6 text-slate-800 flex items-center gap-2">
+              <Star className="text-pink-500 fill-pink-500" size={24} />
+              Aktivitas Kami
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  src: "/images/activity-swim-purple.png",
+                  alt: "Baby Spa & Swim",
+                  title: "Fun Baby Swim",
+                  desc: "Pengalaman renang seru"
+                },
+                {
+                  src: "/images/activity-team.jpg",
+                  alt: "Tim Profesional",
+                  title: "Bidan Profesional",
+                  desc: "Ditangani tenaga ahli"
+                },
+                {
+                  src: "/images/activity-massage.jpg",
+                  alt: "Pijat Bayi",
+                  title: "Baby Massage",
+                  desc: "Relaksasi untuk si kecil"
+                },
+                {
+                  src: "/images/activity-therapy.png",
+                  alt: "Terapi Sinar",
+                  title: "Layanan Kesehatan",
+                  desc: "Terapi infrared & uap"
+                }
+              ].map((item, idx) => (
+                <motion.div 
+                  key={idx} 
+                  className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+                >
+                  <img src={item.src} alt={item.alt} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h4 className="font-bold text-lg">{item.title}</h4>
+                    <p className="text-xs text-slate-200">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              {
-                src: "/images/facility-pool.png",
-                alt: "Kolam Renang Bayi",
-                title: "Kolam Renang Bayi",
-                desc: "Kolam air hangat dengan wallpaper ceria"
-              },
-              {
-                src: "/images/facility-gym.jpg",
-                alt: "Ruang Baby Gym",
-                title: "Ruang Baby Gym",
-                desc: "Perosotan & mainan edukatif untuk si kecil"
-              },
-              {
-                src: "/images/facility-treatment.png",
-                alt: "Ruang Treatment",
-                title: "Ruang Treatment",
-                desc: "Ruang pijat yang bersih dan nyaman"
-              },
-              {
-                src: "/images/facility-massage.png",
-                alt: "Ruang Massage",
-                title: "Ruang Massage",
-                desc: "Matras empuk untuk kenyamanan bayi"
-              }
-            ].map((facility, idx) => (
-              <div 
-                key={idx}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
-              >
-                <img 
-                  src={facility.src} 
-                  alt={facility.alt}
-                  className="w-full h-64 md:h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-xl font-bold mb-1">{facility.title}</h3>
-                  <p className="text-sm text-slate-200">{facility.desc}</p>
-                </div>
-              </div>
-            ))}
+          {/* Facility Gallery */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6 text-slate-800 flex items-center gap-2">
+              <Home className="text-pink-500" size={24} />
+              Fasilitas Kami
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  src: "/images/facility-pool.png",
+                  alt: "Kolam Renang Bayi",
+                  title: "Kolam Renang",
+                  desc: "Air hangat & nyaman"
+                },
+                {
+                  src: "/images/facility-gym.jpg",
+                  alt: "Ruang Baby Gym",
+                  title: "Baby Gym",
+                  desc: "Area bermain edukatif"
+                },
+                {
+                  src: "/images/facility-treatment.png",
+                  alt: "Ruang Treatment",
+                  title: "Ruang Private",
+                  desc: "Bersih & higienis"
+                },
+                {
+                  src: "/images/facility-massage.png",
+                  alt: "Ruang Massage",
+                  title: "Matras Empuk",
+                  desc: "Nyaman untuk bayi"
+                }
+              ].map((item, idx) => (
+                <motion.div 
+                  key={idx} 
+                  className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+                >
+                  <img src={item.src} alt={item.alt} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h4 className="font-bold text-lg">{item.title}</h4>
+                    <p className="text-xs text-slate-200">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -225,7 +291,13 @@ export default function App() {
       {/* --- SERVICES SECTION --- */}
       <section id="pricelist" className="py-24 px-6 relative rounded-t-[3rem] -mt-12 z-20 bg-white shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <motion.div 
+            className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <div className="text-center md:text-left w-full md:w-auto">
               <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Daftar Menu & Harga</span>
               <h2 className="text-4xl font-extrabold">Pilihan Perawatan</h2>
@@ -247,14 +319,22 @@ export default function App() {
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Grid Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredServices.map((service, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
                 className="group relative p-8 rounded-3xl transition-all duration-500 hover:-translate-y-2 border bg-slate-50 border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-pink-100/50 hover:border-pink-200"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ 
+                  duration: 0.4, 
+                  delay: Math.min(idx * 0.05, 1.5),
+                  ease: "easeOut" 
+                }}
               >
                 {service.highlight && (
                   <div className="absolute top-0 right-0 overflow-hidden rounded-tr-3xl rounded-bl-3xl">
@@ -267,35 +347,27 @@ export default function App() {
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 bg-white text-pink-500 shadow-lg shadow-pink-100">
                   <service.icon size={28} strokeWidth={1.5} />
                 </div>
-
-                <div className="mb-4">
-                  <div className="flex justify-between items-start mb-1">
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-md bg-slate-200 text-slate-600">{service.age}</span>
-                  </div>
-                  <h3 className="text-lg font-bold leading-tight group-hover:text-pink-500 transition-colors">
-                    {service.name}
-                  </h3>
-                </div>
                 
-                <p className="text-sm mb-6 line-clamp-2 h-10 text-slate-600">
-                  {service.desc}
-                </p>
-
+                <h3 className="text-lg font-extrabold mb-2 text-slate-900 group-hover:text-pink-500 transition-colors">
+                  {service.name}
+                </h3>
+                <p className="text-xs text-slate-500 mb-1 font-medium">{service.age}</p>
+                <p className="text-sm text-slate-600 mb-6 leading-relaxed">{service.desc}</p>
+                
                 <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-                   <div className="flex flex-col">
-                     <span className="text-[10px] uppercase text-slate-400 font-bold">Mulai dari</span>
-                     <span className="text-xl font-extrabold text-pink-500">{service.price}</span>
-                   </div>
-                   <a 
-                     href={`https://wa.me/6281325641896?text=Halo, saya mau booking *${service.name}* (${service.price}). Mohon info lebih lanjut.`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 hover:bg-pink-500 hover:text-white transition-all"
-                   >
-                     <ArrowRight size={18} />
-                   </a>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase text-slate-400 font-bold">Mulai dari</span>
+                    <span className="text-xl font-extrabold text-pink-500">{service.price}</span>
+                  </div>
+                  <a 
+                    href={`https://wa.me/6281325641896?text=Halo, saya ingin booking ${service.name} (${service.price})`}
+                    target="_blank"
+                    className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 hover:bg-pink-500 hover:text-white transition-all"
+                  >
+                    <ArrowRight size={18} />
+                  </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -304,11 +376,17 @@ export default function App() {
       {/* --- TESTIMONIALS SECTION --- */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Testimoni Customer</span>
             <h2 className="text-4xl font-extrabold mb-4">Apa Kata Mereka?</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">Kepuasan customer adalah prioritas kami. Berikut testimoni dari para Bunda yang sudah merasakan layanan Mayesha Baby Spa.</p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -355,9 +433,13 @@ export default function App() {
                 initial: "A"
               }
             ].map((testimonial, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
                 className="p-6 rounded-2xl border border-slate-100 hover:border-pink-200 hover:shadow-lg transition-all duration-300 bg-slate-50"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.15, ease: "easeOut" }}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
@@ -376,7 +458,7 @@ export default function App() {
                 </div>
                 
                 <p className="text-sm text-slate-600 leading-relaxed italic">"{testimonial.text}"</p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -397,10 +479,16 @@ export default function App() {
       {/* --- FAQ SECTION --- */}
       <section id="faq" className="py-20 px-6 bg-slate-50">
          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
                <h2 className="text-3xl font-bold mb-4">Sering Ditanyakan (FAQ)</h2>
                <p className="text-slate-600">Informasi seputar layanan Mayesha Baby Spa</p>
-            </div>
+            </motion.div>
             
             <div className="space-y-4">
                {faqs.map((faq, i) => (
