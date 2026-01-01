@@ -8,3 +8,16 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
+
+/* Fix for Safari flickering during animations */
+* {
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+body {
+  opacity: 1;
+  transition: opacity 0.1s ease-in;
+}
