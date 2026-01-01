@@ -298,7 +298,7 @@ export default function App() {
       {/* --- SERVICES SECTION --- */}
       <section id="pricelist" className="py-24 px-6 relative rounded-t-[3rem] -mt-12 z-20 bg-white shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 animate-on-scroll">
             <div className="text-center md:text-left w-full md:w-auto">
               <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Daftar Menu & Harga</span>
               <h2 className="text-4xl font-extrabold">Pilihan Perawatan</h2>
