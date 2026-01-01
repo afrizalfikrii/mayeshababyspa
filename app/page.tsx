@@ -17,7 +17,7 @@ const services = [
   { name: "Memandikan Bayi Baru Lahir Home Care", age: "Newborn", price: "45K", category: "Baby", desc: "Mandi, perawatan tali pusar, pemantauan ikterik di rumah.", icon: Baby },
   { name: "Mandi Bayi", age: "Baby", price: "15K", category: "Baby", desc: "Layanan mandi bayi profesional.", icon: Baby },
   { name: "Masker Anak", age: "Kids", price: "10K", category: "Care", desc: "Masker perawatan wajah untuk anak.", icon: Smile },
-  { name: "Membersihkan Sela Korang", age: "Baby", price: "15K", category: "Care", desc: "Membersihkan sela-sela kulit bayi.", icon: CheckCircle },
+  { name: "Membersihkan Sela Karang", age: "Baby", price: "15K", category: "Care", desc: "Membersihkan sela-sela kulit bayi.", icon: CheckCircle },
   
   // Baby & Kids Treatment
   { name: "Pijat Batuk Pilek", age: "0-5 Th", price: "40K - 60K", category: "Health", desc: "Pijat khusus meredakan batuk pilek anak.", icon: ShieldCheck },

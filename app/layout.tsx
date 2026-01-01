@@ -63,6 +63,11 @@ export const metadata: Metadata = {
     description: "Layanan Baby Spa, Pijat Bayi, Kids Massage, Pijat Laktasi, dan Mom Treatment dengan terapis bidan profesional.",
     images: ['/logo.png'],
   },
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
   robots: {
     index: true,
     follow: true,
