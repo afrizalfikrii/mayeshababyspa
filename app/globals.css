@@ -4,29 +4,3 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
-
-/* Fix for Safari flickering during animations - exclude nav */
-*:not(nav):not(nav *) {
-  -webkit-transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-}
-
-/* Ensure mobile bottom nav stays visible */
-nav {
-  -webkit-transform: none !important;
-  transform: none !important;
-}
-
-/* Prevent FOUC (Flash of Unstyled Content) */
-body {
-  opacity: 1;
-  transition: opacity 0.1s ease-in;
-}
-
-/* Add padding for mobile bottom navigation */
-@media (max-width: 768px) {
-  body {
-    padding-bottom: 80px;
-  }
-}
