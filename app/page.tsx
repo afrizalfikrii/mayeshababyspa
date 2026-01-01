@@ -582,7 +582,7 @@ export default function App() {
       </footer>
 
       {/* --- MOBILE BOTTOM NAVIGATION --- */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 shadow-lg">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-slate-200 shadow-lg pb-safe" style={{ position: 'fixed' }}>
         <div className="flex justify-around items-center py-3 px-2">
           <a href="#home" className="flex flex-col items-center gap-1 text-slate-600 hover:text-pink-500 transition-colors">
             <Home size={22} />
