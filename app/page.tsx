@@ -377,7 +377,7 @@ export default function App() {
       {/* --- TESTIMONIALS SECTION --- */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-on-scroll">
             <span className="text-pink-500 font-bold tracking-wider text-sm uppercase mb-2 block">Testimoni Customer</span>
             <h2 className="text-4xl font-extrabold mb-4">Apa Kata Mereka?</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">Kepuasan customer adalah prioritas kami. Berikut testimoni dari para Bunda yang sudah merasakan layanan Mayesha Baby Spa.</p>
@@ -430,7 +430,7 @@ export default function App() {
             ].map((testimonial, idx) => (
               <div 
                 key={idx}
-                className="p-6 rounded-2xl border border-slate-100 hover:border-pink-200 hover:shadow-lg transition-all duration-300 bg-slate-50"
+                className="p-6 rounded-2xl border border-slate-100 hover:border-pink-200 hover:shadow-lg transition-all duration-300 bg-slate-50 animate-on-scroll"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
@@ -470,7 +470,7 @@ export default function App() {
       {/* --- FAQ SECTION --- */}
       <section id="faq" className="py-20 px-6 bg-slate-50">
          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 animate-on-scroll">
                <h2 className="text-3xl font-bold mb-4">Sering Ditanyakan (FAQ)</h2>
                <p className="text-slate-600">Informasi seputar layanan Mayesha Baby Spa</p>
             </div>
