@@ -131,8 +131,19 @@ export default function App() {
       </nav>
 
       {/* --- HERO SECTION --- */}
-      <header id="home" className="relative pt-40 pb-20 px-6 min-h-[90vh] flex flex-col justify-center items-center text-center">
-        <div className="max-w-5xl mx-auto z-10">
+      <header id="home" className="relative pt-40 pb-20 px-6 min-h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/hero-background.png" 
+            alt="Baby Spa Background" 
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay for Text Readability - Lighter */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/60 to-white/40"></div>
+        </div>
+        
+        <div className="max-w-5xl mx-auto z-10 relative">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-pink-200 backdrop-blur-md mb-8 animate-fade-in-up shadow-sm">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             <span className="text-xs font-bold tracking-wider uppercase text-pink-600">
